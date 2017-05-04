@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true"
+	>
+	
+
+	<import resource="ToshibaContext.xml"/>
+	<import resource="SonyContext.xml"/>
+	<import resource="DataBase.xml"/>
+	
+	<bean id="t1000" class="net.robots.RobotT1000"
+	parent="baseModel"
+	scope="prototype"
+	>
+
+	<constructor-arg value="silver" index="3"></constructor-arg>
+	<constructor-arg value="2200" index="4"></constructor-arg>
+	<constructor-arg value="true" index="5"></constructor-arg>
+	<replaced-method name="action" replacer="actionReplacer"></replaced-method>
+	
+	 </bean>
+	
+	<bean id="baseModel" abstract="true" class="net.robots.RobotT1000">
+	<constructor-arg ref="sonyHead" index="0"></constructor-arg>
+	<constructor-arg ref="sonyHand" index="1"></constructor-arg>
+	<constructor-arg ref="sonyLeg" index="2"></constructor-arg>
+	</bean>
+	
+	<bean id="actionReplacer" class="replacer.ActionReplacer"></bean>
+
+</beans>
